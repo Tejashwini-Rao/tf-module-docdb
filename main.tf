@@ -9,7 +9,7 @@ resource "aws_docdb_cluster" "docdb" {
 }
 
 resource "local_file" "foo" {
-  content = data.aws_ssm_parameter.crendtials.name
+  content = data.aws_ssm_parameter.crendtials.value
   filename = "/tmp/out"
 }
 
