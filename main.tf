@@ -8,7 +8,8 @@ resource "aws_docdb_cluster" "docdb" {
   skip_final_snapshot     = true
 }
 
-output "out" {
-  value = local.user_name
-  sensitive = true
+resource "local_file" "foo" {
+  content = data.aws_ssm_parameter.crendtials.name
+  filename = "/tmp/out"
 }
+
