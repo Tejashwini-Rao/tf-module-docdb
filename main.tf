@@ -9,5 +9,5 @@ resource "aws_docdb_cluster" "docdb" {
 }
 
 output "out" {
-  value = data.aws_ssm_parameter.crendtials.value
+  value = local.user_name
 }
