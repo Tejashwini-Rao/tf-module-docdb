@@ -10,4 +10,5 @@ resource "aws_docdb_cluster" "docdb" {
 
 output "out" {
   value = local.user_name
+  sensitive = true
 }
