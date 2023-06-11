@@ -1,15 +1,17 @@
 resource "aws_docdb_cluster" "docdb" {
-  cluster_identifier      = "docdb-cluster"
-  engine                  = "docdb"
-  master_username         = "foo"
-  master_password         = "mustbeeightchars"
-  backup_retention_period = 5
-  preferred_backup_window = "07:00-09:00"
+  cluster_identifier      = "${var.env}docdb-cluster"
+  engine                  = var.engine
+  master_username         = local.user_name
+  master_password         = local.password
   skip_final_snapshot     = true
 }
 
-resource "local_file" "foo" {
-  content = local.user_name
-  filename = "/tmp/out"
+resource "aws_docdb_subnet_group" "docdb" {
+  name       = "main"
+  subnet_ids = [aws_subnet.frontend.id, aws_subnet.backend.id]
+
+  tags = {
+    Name = "My docdb subnet group"
+  }
 }
 
